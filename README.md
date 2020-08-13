@@ -32,4 +32,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e378ae05-8cd4-4f28-aac1-6520dfd61f14/deploy-status)](https://app.netlify.com/sites/smartquiz/deploys)
 ## License
