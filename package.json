@@ -4,7 +4,7 @@
   "scripts": {
     "start": "parcel build *.html"
   },
-  "devDependencies": {
+  "Dependencies": {
     "parcel-bundler": "1.6.0"
   }
 }
