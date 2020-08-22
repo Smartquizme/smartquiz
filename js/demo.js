@@ -1,55 +1,77 @@
-function urlSubmit(){
-	var url = urlInput.value;
-	wtf.fetch(url).then((doc) => {
-        let text = nlp(doc).wordCount()
-      //var t = doc.paragraphs().map(l => l.text())
-	  //questions.push(t);
-	  doc.sentences().map(function (l) {
-		  
-		  	  q = {
-			        question : l.text(),
-			        imgSrc : "img/html.png",
-			        choiceA : "True",
-			        choiceB : "False",
-			        //choiceC : "Wrong",
-			        correct : "A"
-			    }
-                questions.push(q); 
-                // console.log(q);
-                // return l.text(); 
-        });
-        // alert(text);
+//questions array
+let questions = [
+  {
+    question:
+      " Alexander died in the palace of Nebuchadnezzar II, in Babylon, at age 42.",
+    imgSrc: "img/html.png",
+    choiceA: "True",
+    choiceB: "False",
+    //choiceC : "Wrong",
+    correct: "B"
+  }
+];
 
-	})
+function urlSubmit() {
+  var q;
+  var img;
+  var imgUrl;
+  var url = urlInput.value;
+  wtf.fetch(url).then(doc => {
+    img = doc.images(0);
+    imgUrl = img.thumbnail();
+    doc.sentences().map(function(sentences) {
+      q = {
+        question: negateSentence(sentences.text()),
+        imgSrc: imgUrl,
+        choiceA: "True",
+        choiceB: "False",
+        //choiceC : "Wrong",
+        correct: "B"
+      };
+      questions.push(q);
+    });
+    // alert(text);
+  });
 }
 
-function generate_question(e){
-    e.preventDefault();
-var noOfQuestions = document.forms["question_num_form"]["noofquestions"].value;
-// If x is Not a Number or less than one or greater than 10
-if (isNaN(noOfQuestions) || noOfQuestions < 1 || noOfQuestions > 10) {
-  alert("Input not valid");
-  return false;
-} else {
-  
-}
-questionNumsection.style.display = "none";
-//quizzsection.style.display = "block";
+// negate positive functions
+
+function negateSentence(sentence) {
+  console.log(
+    nlp(sentence)
+      .sentences()
+      .toNegative()
+      .text()
+  );
+  return nlp(sentence)
+    .sentences()
+    .toNegative()
+    .text();
 }
 
-function cleantext(str){
+function generate_question(e) {
+  e.preventDefault();
+  var noOfQuestions =
+    document.forms["question_num_form"]["noofquestions"].value;
+  // If x is Not a Number or less than one or greater than 10
+  if (isNaN(noOfQuestions) || noOfQuestions < 1 || noOfQuestions > 10) {
+    alert("Input not valid");
+    return false;
+  } else {
+  }
+  questionNumsection.style.display = "none";
+  //quizzsection.style.display = "block";
+}
+
+function cleantext(str) {
   // remove any citations
-   return str.replace(/\[(.*?)\]+/g, '');
+  return str.replace(/\[(.*?)\]+/g, "");
 }
-
 
 // var url = 'https://en.wikipedia.org/wiki/Rajneesh&selector=p&scrape=text&pretty=true';
 // fetch('https://web.scraper.workers.dev/?url='+url)
 //   .then(response => response.json())
 //   .then(data => console.log(data));
-
-
-
 
 // select all elements
 const start = document.getElementById("start");
@@ -64,18 +86,6 @@ const timeGauge = document.getElementById("timeGauge");
 const progress = document.getElementById("progress");
 const scoreDiv = document.getElementById("scoreContainer");
 
-// create our questions
-let questions = [
-    {
-        question : " Alexander died in the palace of Nebuchadnezzar II, in Babylon, at age 42.",
-        imgSrc : "img/html.png",
-        choiceA : "True",
-        choiceB : "False",
-        //choiceC : "Wrong",
-        correct : "B"
-    }
-];
-
 // create some variables
 //const lastQuestion = questions.length - 1;
 var lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
@@ -88,133 +98,124 @@ let TIMER;
 let score = 0;
 
 // render a question
-function renderQuestion(){
-    let q = questions[runningQuestion];
-    
-    question.innerHTML = "<p>"+ q.question +"</p>";
-    //qImg.innerHTML = "<img src="+ q.imgSrc +">";
-    choiceA.innerHTML = q.choiceA;
-    choiceB.innerHTML = q.choiceB;
-    //choiceC.innerHTML = q.choiceC;
+function renderQuestion() {
+  let q = questions[runningQuestion];
+
+  question.innerHTML = "<p>" + q.question + "</p>";
+  qImg.innerHTML = "<img src=" + q.imgSrc + ">";
+  choiceA.innerHTML = q.choiceA;
+  choiceB.innerHTML = q.choiceB;
+  //choiceC.innerHTML = q.choiceC;
 }
 
-
 // start quiz
-function startQuiz(){
-     //var noOfQuestions = document.forms["question_num_form"]["noofquestions"].value;
-     lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
-    questionNumsection.style.display = "none";
-    renderQuestion();
-    quiz.style.display = "block";
-    renderProgress();
-    renderCounter();
-    TIMER = setInterval(renderCounter,1000); // 1000ms = 1s
+function startQuiz() {
+  //var noOfQuestions = document.forms["question_num_form"]["noofquestions"].value;
+  lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
+  questionNumsection.style.display = "none";
+  renderQuestion();
+  quiz.style.display = "block";
+  renderProgress();
+  renderCounter();
+  TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
 }
 
 // render progress
-function renderProgress(){
-	// lastQuestion
-    for(let qIndex = 0; qIndex <=lastQuestion; qIndex++){
-        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
-    }
+function renderProgress() {
+  // lastQuestion
+  for (let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
+    progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
+  }
 }
 
 // counter render
 
-function renderCounter(){
-    if(count <= questionTime){
-        counter.innerHTML = count;
-        timeGauge.style.width = count * gaugeUnit + "px";
-        count++
-    }else{
-        count = 0;
-        // change progress color to red
-        answerIsWrong();
-        if(runningQuestion < lastQuestion){
-            runningQuestion++;
-            renderQuestion();
-        }else{
-            // end the quiz and show the score
-            clearInterval(TIMER);
-            scoreRender();
-        }
+function renderCounter() {
+  if (count <= questionTime) {
+    counter.innerHTML = count;
+    timeGauge.style.width = count * gaugeUnit + "px";
+    count++;
+  } else {
+    count = 0;
+    // change progress color to red
+    answerIsWrong();
+    if (runningQuestion < lastQuestion) {
+      runningQuestion++;
+      renderQuestion();
+    } else {
+      // end the quiz and show the score
+      clearInterval(TIMER);
+      scoreRender();
     }
+  }
 }
 
 // checkAnswer
 
-function checkAnswer(answer){
-    if( answer == questions[runningQuestion].correct){
-        // answer is correct
-        score++;
-        // change progress color to green
-        answerIsCorrect();
-    }else{
-        // answer is wrong
-        // change progress color to red
-        answerIsWrong();
-    }
-    count = 0;
-    if(runningQuestion < lastQuestion){
-        runningQuestion++;
-        renderQuestion();
-    }else{
-        // end the quiz and show the score
-        clearInterval(TIMER);
-        scoreRender();
-    }
+function checkAnswer(answer) {
+  if (answer == questions[runningQuestion].correct) {
+    // answer is correct
+    score++;
+    // change progress color to green
+    answerIsCorrect();
+  } else {
+    // answer is wrong
+    // change progress color to red
+    answerIsWrong();
+  }
+  count = 0;
+  if (runningQuestion < lastQuestion) {
+    runningQuestion++;
+    renderQuestion();
+  } else {
+    // end the quiz and show the score
+    clearInterval(TIMER);
+    scoreRender();
+  }
 }
 
 // answer is correct
-function answerIsCorrect(){
-    document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+function answerIsCorrect() {
+  document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
 }
 
 // answer is Wrong
-function answerIsWrong(){
-    document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+function answerIsWrong() {
+  document.getElementById(runningQuestion).style.backgroundColor = "#f00";
 }
 
 // score render
-function scoreRender(){
-    scoreDiv.style.display = "block";
-    
-    // calculate the amount of question percent answered by the user
-    const scorePerCent = Math.round(100 * score/lastQuestion);
-    
-    // choose the image based on the scorePerCent
-    let img = (scorePerCent >= 80) ? "img/5.png" :
-              (scorePerCent >= 60) ? "img/4.png" :
-              (scorePerCent >= 40) ? "img/3.png" :
-              (scorePerCent >= 20) ? "img/2.png" :
-              "img/1.png";
-    
-    //scoreDiv.innerHTML = "<img src="+ img +">";
-    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+function scoreRender() {
+  scoreDiv.style.display = "block";
+
+  // calculate the amount of question percent answered by the user
+  const scorePerCent = Math.round((100 * score) / lastQuestion);
+
+  // choose the image based on the scorePerCent
+  let img =
+    scorePerCent >= 80
+      ? "img/5.png"
+      : scorePerCent >= 60
+      ? "img/4.png"
+      : scorePerCent >= 40
+      ? "img/3.png"
+      : scorePerCent >= 20
+      ? "img/2.png"
+      : "img/1.png";
+
+  //scoreDiv.innerHTML = "<img src="+ img +">";
+  scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-var urlInput = document.getElementById('urlInput');
-var urlInputBtn = document.getElementById('submitUrl');
+var urlInput = document.getElementById("urlInput");
+var urlInputBtn = document.getElementById("submitUrl");
 //var generateBtn = document.getElementById('finalgeneratebtn');
-var quizzsection = document.getElementById('quizzsection');
-var question_text = document.getElementById('question-text');
-var questtionNoformElement = document.getElementById('questtionno-form');
-var noofquestionsinput = document.getElementById('noofquestions');
-
+var quizzsection = document.getElementById("quizzsection");
+var question_text = document.getElementById("question-text");
+var questtionNoformElement = document.getElementById("questtionno-form");
+var noofquestionsinput = document.getElementById("noofquestions");
 
 //generateBtn.addEventListener('click', GenerateQuiz);
-urlInputBtn.addEventListener('click', urlSubmit);
-questtionNoformElement.addEventListener('submit', generate_question);
-finalgeneratebtn.addEventListener("click",startQuiz);
+urlInputBtn.addEventListener("click", urlSubmit);
+questtionNoformElement.addEventListener("submit", generate_question);
+finalgeneratebtn.addEventListener("click", startQuiz);
