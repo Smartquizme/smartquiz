@@ -21,7 +21,7 @@
       rel="stylesheet"
     />
     <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/fontawesome-all.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" />
     <link href="css/swiper.css" rel="stylesheet" />
     <link href="css/magnific-popup.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -535,7 +535,11 @@
     <script src="https://unpkg.com/wtf_wikipedia"></script>
     <script src="https://unpkg.com/compromise"></script>
     <script src="https://unpkg.com/compromise-numbers"></script>
-    <!-- nlp compromise number plugin-->
+    <script src="https://unpkg.com/compromise-sentences"></script>
+    <script>
+    nlp.extend(compromiseNumbers)
+    nlp.extend(compromiseSentences)
+    </script>
 
     <script>
       // Your web app's Firebase configuration
@@ -607,7 +611,7 @@
       // };
     </script>
     <script src="js/main.js"></script>
-    <script src="js/demo.js"></script>
+    <script src="js/demo.js" defer></script>
     <script>
       window.cookieconsent.initialise({
         palette: {
