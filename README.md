@@ -4,7 +4,9 @@ Generate quiz from the web.
 
 ## Getting Started
 
+
 ### The main file generating quiz for the home page is in `/js/demo.js`
+
 We run on a [Firebase](https://firebase.google.com/) backend, and for the frontend currently it is vanilla javascript. 
 
 
@@ -35,4 +37,6 @@ Please make sure to update tests as appropriate.
 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e378ae05-8cd4-4f28-aac1-6520dfd61f14/deploy-status)](https://app.netlify.com/sites/smartquiz/deploys)
+
 ## License
+
