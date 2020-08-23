@@ -1,15 +1,5 @@
 //questions array
-let questions = [
-  {
-    question:
-      " Alexander died in the palace of Nebuchadnezzar II, in Babylon, at age 42.",
-    imgSrc: "img/html.png",
-    choiceA: "True",
-    choiceB: "False",
-    //choiceC : "Wrong",
-    correct: "B"
-  }
-];
+var questions = [];
 
 function urlSubmit() {
   var q;
@@ -29,6 +19,7 @@ function urlSubmit() {
         correct: "B"
       };
       questions.push(q);
+      //
     });
     // alert(text);
   });
@@ -37,37 +28,26 @@ function urlSubmit() {
 // negate positive functions
 
 function negateSentence(sentence) {
-  console.log(
-    nlp(sentence)
-      .sentences()
-      .toNegative()
-      .text()
-  );
-  return nlp(sentence)
+  var negativeQuestions = nlp(sentence)
     .sentences()
     .toNegative()
     .text();
-}
-
-function generate_question(e) {
-  e.preventDefault();
-  var noOfQuestions =
-    document.forms["question_num_form"]["noofquestions"].value;
-  // If x is Not a Number or less than one or greater than 10
-  if (isNaN(noOfQuestions) || noOfQuestions < 1 || noOfQuestions > 10) {
-    alert("Input not valid");
-    return false;
-  } else {
-  }
-  questionNumsection.style.display = "none";
-  //quizzsection.style.display = "block";
+  return cleantext(negativeQuestions);
 }
 
 function cleantext(str) {
-  // remove any citations
-  return str.replace(/\[(.*?)\]+/g, "");
+  // remove any citations and any text b/n brackets
+  return str.replace(/ *\([^)]*\) */g, "");
 }
 
+
+/* Randomize questions array*/
+function shuffleQuestions(questions) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 // var url = 'https://en.wikipedia.org/wiki/Rajneesh&selector=p&scrape=text&pretty=true';
 // fetch('https://web.scraper.workers.dev/?url='+url)
 //   .then(response => response.json())
@@ -99,6 +79,7 @@ let score = 0;
 
 // render a question
 function renderQuestion() {
+  //questions = shuffleQuestions(questions);
   let q = questions[runningQuestion];
 
   question.innerHTML = "<p>" + q.question + "</p>";
@@ -109,15 +90,26 @@ function renderQuestion() {
 }
 
 // start quiz
-function startQuiz() {
-  //var noOfQuestions = document.forms["question_num_form"]["noofquestions"].value;
-  lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
-  questionNumsection.style.display = "none";
-  renderQuestion();
-  quiz.style.display = "block";
-  renderProgress();
-  renderCounter();
-  TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
+function startQuiz(e) {
+  e.preventDefault();
+  var noOfQuestions =
+    document.forms["question_num_form"]["noofquestions"].value;
+  // If x is Not a Number or less than one or greater than 10
+  if (isNaN(noOfQuestions) || noOfQuestions < 1 || noOfQuestions > 10) {
+    alert("Please enter a number between 1 and 10");
+    return false;
+  } else {
+    questionNumsection.style.display = "none";
+    //var noOfQuestions = document.forms["question_num_form"]["noofquestions"].value;
+    lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
+    questionNumsection.style.display = "none";
+    renderQuestion();
+    quiz.style.display = "block";
+    renderProgress();
+    renderCounter();
+    TIMER = setInterval(renderCounter, 1000); // 1000ms = 1s
+  }
+
 }
 
 // render progress
@@ -209,13 +201,10 @@ function scoreRender() {
 
 var urlInput = document.getElementById("urlInput");
 var urlInputBtn = document.getElementById("submitUrl");
-//var generateBtn = document.getElementById('finalgeneratebtn');
 var quizzsection = document.getElementById("quizzsection");
 var question_text = document.getElementById("question-text");
 var questtionNoformElement = document.getElementById("questtionno-form");
 var noofquestionsinput = document.getElementById("noofquestions");
 
-//generateBtn.addEventListener('click', GenerateQuiz);
 urlInputBtn.addEventListener("click", urlSubmit);
-questtionNoformElement.addEventListener("submit", generate_question);
-finalgeneratebtn.addEventListener("click", startQuiz);
+questtionNoformElement.addEventListener("submit", startQuiz);
