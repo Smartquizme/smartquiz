@@ -99,10 +99,10 @@ function startQuiz(e) {
     alert("Please enter a number between 1 and 10");
     return false;
   } else {
-    questionNumsection.style.display = "none";
+    questtionNoformElement.style.display = "none";
     //var noOfQuestions = document.forms["question_num_form"]["noofquestions"].value;
     lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
-    questionNumsection.style.display = "none";
+    questtionNoformElement.style.display = "none";
     renderQuestion();
     quiz.style.display = "block";
     renderProgress();

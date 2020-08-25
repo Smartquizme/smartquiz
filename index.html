@@ -115,6 +115,11 @@
               ></a>
             </li>
             <li class="nav-item">
+              <a class="nav-link page-scroll" href="pricing.html"
+                >PRICING <span class="sr-only"></span
+              ></a>
+            </li>
+            <li class="nav-item">
               <a
                 hidden
                 id="sign-in"
@@ -324,30 +329,40 @@
       <!-- quiz container -->
       <div id="container">
         <!--        <div id="">Start Quiz!</div> -->
-        <form
-          id="questtionno-form"
-          name="question_num_form"
-          data-toggle="validator"
-          data-focus="false"
-        >
-          <div class="form-group">
-            <div class="text-container offset-lg-4" id="questionNumsection">
+        <form id="questtionno-form" class="offset-lg-4" name="question_num_form" data-toggle="validator" data-focus="false" id="questionNumsection">
+            <div class="form-group text-container">
               <input
                 type="number"
                 name="noofquestions"
                 id="noofquestions"
                 placeholder="No of question.."
               />
-              <button
+            </div>
+
+              <div class="form-group form-check">
+                <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample" checked>
+                <label class="custom-control-label" for="defaultInline1">True/false questions</label>
+              </div>
+
+              <div class="form-group form-check">
+                <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample" disabled>
+                <label class="custom-control-label" for="defaultInline2">multiple-choice questions<small>(comming Soon!)</small></label>
+              </div>
+
+              <div class="form-group form-check">
+                <input type="radio" class="custom-control-input" id="defaultInline3" name="inlineDefaultRadiosExample" disabled>
+                <label class="custom-control-label" for="defaultInline3">recall questions<small>(comming Soon!)</small></label>
+              </div>
+            
+                <button
                 class="btn-outline-sm"
                 type="submit"
                 id="finalgeneratebtn"
               >
                 Go
               </button>
-            </div>
-          </div>
         </form>
+
         <div id="quiz" style="display: none">
           <div id="question"></div>
           <div id="qImg"></div>
@@ -516,8 +531,7 @@
       </div>
       <!-- end of container -->
     </div>
-    <!-- end of copyright -->
-    <!-- end of copyright -->
+   
 
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
@@ -526,9 +540,6 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Bootstrap framework -->
     <script src="js/jquery.magnific-popup.js"></script>
-    <!-- Magnific Popup for lightboxes -->
-    <script src="js/validator.min.js"></script>
-    <!-- Validator.js - Bootstrap plugin that validates forms -->
     <script src="js/scripts.js"></script>
     <!-- Custom scripts -->
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
