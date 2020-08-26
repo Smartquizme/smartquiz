@@ -10,18 +10,24 @@
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Learn Better with Smartquiz"
+      content="Smartquiz.me is your place to test your knowledge. Take automatically generated quizzes to assess your self."
     />
     <!-- Website Title -->
-    <title>SmartQuiz - Find out how much do you learn</title>
+    <title>SmartQuiz Dashboard - Find out how much do you learn</title>
 
     <!-- Styles -->
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext"
       rel="stylesheet"
     />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <link href="css/swiper.css" rel="stylesheet" />
     <link href="css/magnific-popup.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -30,58 +36,56 @@
     <!-- Favicon  -->
     <link rel="icon" href="images/favicon.png" />
 
-<style>
-/* drag and drop */
-.inputDnD .form-control-file {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 6em;
-  outline: none;
-  visibility: hidden;
-  cursor: pointer;
-  background-color: #c61c23;
-  box-shadow: 0 0 5px solid #fff;
-}
-.inputDnD .form-control-file:before {
-  content: attr(data-title);
-  position: absolute;
-  top: 0.5em;
-  left: 0;
-  width: 100%;
-  min-height: 6em;
-  line-height: 2em;
-  padding-top: 1.5em;
-  opacity: 1;
-  visibility: visible;
-  text-align: center;
-  border: 0.25em dashed #fff;
-  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  overflow: hidden;
-}
-.inputDnD .form-control-file:hover:before {
-  border-style: solid;
-  box-shadow: inset 0px 0px 0px 0.25em #fff;
-}    
-</style>
-<script>
-  // drag and drop
-  function readUrl(input) {
-  
-  if (input.files && input.files[0]) {
-    let reader = new FileReader();
-    reader.onload = (e) => {
-      let imgData = e.target.result;
-      let imgName = input.files[0].name;
-      input.setAttribute("data-title", imgName);
-      console.log(e.target.result);
-    }
-    reader.readAsDataURL(input.files[0]);
-  }
-
-}
-</script>
+    <style>
+      /* drag and drop */
+      .inputDnD .form-control-file {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 6em;
+        outline: none;
+        visibility: hidden;
+        cursor: pointer;
+        background-color: #c61c23;
+        box-shadow: 0 0 5px solid #fff;
+      }
+      .inputDnD .form-control-file:before {
+        content: attr(data-title);
+        position: absolute;
+        top: 0.5em;
+        left: 0;
+        width: 100%;
+        min-height: 6em;
+        line-height: 2em;
+        padding-top: 1.5em;
+        opacity: 1;
+        visibility: visible;
+        text-align: center;
+        border: 0.25em dashed #fff;
+        -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        overflow: hidden;
+      }
+      .inputDnD .form-control-file:hover:before {
+        border-style: solid;
+        box-shadow: inset 0px 0px 0px 0.25em #fff;
+      }
+    </style>
+    <script>
+      // drag and drop
+      function readUrl(input) {
+        if (input.files && input.files[0]) {
+          let reader = new FileReader();
+          reader.onload = e => {
+            let imgData = e.target.result;
+            let imgName = input.files[0].name;
+            input.setAttribute("data-title", imgName);
+            console.log(e.target.result);
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    </script>
   </head>
   <body data-spy="scroll" data-target=".fixed-top">
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -129,7 +133,7 @@
         </div>
 
         <!-- Image Logo -->
-        <a class="navbar-brand logo-image" href="#"
+        <a class="navbar-brand logo-image" href="index.html"
           ><img src="images/logo.png" alt="alternative"
         /></a>
 
@@ -170,9 +174,7 @@
               >
             </li>
             <li class="nav-item">
-              <a hidden id="dashboard" class="nav-link" href="dashboard.html"
-                >Dashboard</a
-              >
+              <a hidden id="dashboard" class="nav-link" href="#">Dashboard</a>
             </li>
             <li class="nav-item">
               <a
@@ -216,8 +218,8 @@
           <div class="row">
             <div class="col-lg-6 col-xl-5">
               <div class="text-container">
-                <h1>Quiz Generator For Articles.</h1>
-                <p class="p-large">Use SmartQuiz to test yourself.</p>
+                <!--                 <h1>Quiz Generator For Articles.</h1> -->
+                <p class="p-large">Generate Your Quiz From An Article.</p>
                 <form id="demoForm" data-toggle="validator" data-focus="false">
                   <div class="form-group">
                     <input
@@ -225,17 +227,17 @@
                       class="form-control-input"
                       id="urlInput"
                       value="https://en.wikipedia.org/wiki/Alexander_the_Great"
-                      placeholder="Paste Any Wikipedia Url"
+                      placeholder="Paste Any Article Url"
                       required
                     />
                     <!-- <label class="label-control" for="nemail">Paste Any Wikipedia Url</label> -->
                     <div class="help-block with-errors"></div>
                   </div>
                   <a
-                    class="btn-solid-lg popup-with-move-anim"
-                    href="#some-lightbox-2"
+                    class="btn-solid-lg page-scroll"
+                    href="#questionDetails"
                     id="submitUrl"
-                    >Demo</a
+                    >Generate</a
                   >
                 </form>
               </div>
@@ -244,35 +246,69 @@
             <!-- end of col -->
             <div class="col-lg-6 col-xl-7">
               <ul class="nav nav-tabs text-input">
-                <li class="active"><a data-toggle="tab" class="nav-link" href="#text">Enter Text</a></li>
-                <li><a data-toggle="tab" class="nav-link" href="#drag">Drag and Drop</a></li>
+                <li class="active">
+                  <a data-toggle="tab" class="nav-link" href="#text"
+                    >Enter Text</a
+                  >
+                </li>
+                <li>
+                  <a data-toggle="tab" class="nav-link" href="#drag"
+                    >Drag and Drop</a
+                  >
+                </li>
               </ul>
 
               <div class="tab-content">
                 <div id="text" class="tab-pane fade in active">
-                  <h3>HOME</h3>
-                  <form id="" data-toggle="validator" data-focus="false">
-                  <div class="form-group">
-                    <textarea type="url" class="form-control-input" id="urlInput" placeholder="Paste text to we will generate the quiz for you" row="5" required></textarea>
-                    <!-- <label class="label-control" for="nemail">Paste Any Wikipedia Url</label> -->
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <a
-                    class="btn-solid-lg popup-with-move-anim" href="#some-lightbox-2">Demo</a
-                  >
-                </form>
+                  <h4 class="text-light text-center">
+                    Enter any amount of text
+                  </h4>
+                  <form id="url-form" data-toggle="validator" data-focus="false">
+                    <div class="form-group">
+                      <textarea
+                        type="url"
+                        class="form-control-input"
+                        id="textInput"
+                        placeholder="Paste text to we will generate the quiz for you"
+                        row="5"
+                        required
+                      ></textarea>
+                      <!-- <label class="label-control" for="nemail">Paste Any Wikipedia Url</label> -->
+                      <div class="help-block with-errors"></div>
+                    </div>
+                    <a
+                      class="btn-solid-lg popup-with-move-anim"
+                      href="#some-lightbox-2"
+                      >Demo</a
+                    >
+                  </form>
                 </div>
                 <div id="drag" class="tab-pane fade">
-                  <h3>Select File</h3>
-                      <div class="row m-b-1">
-                        <div class="col-sm-6 offset-sm-3">
-                          <button type="button" class="btn btn-solid-lg btn-block" onclick="document.getElementById('inputFile').click()">Add Pdf</button>
-                          <div class="form-group inputDnD">
-                            <label class="sr-only" for="inputFile">File Upload</label>
-                            <input type="file" class="form-control-file font-weight-bold" id="inputFile" accept=".pdf" onchange="readUrl(this)" data-title="Drag and drop a file">
-                          </div>
-                        </div>
+                  <h4 class="text-light text-center">Drag and Drop Pdf File</h4>
+                  <div class="row m-b-1">
+                    <div class="col-sm-6 offset-sm-3">
+                      <button
+                        type="button"
+                        class="btn btn-solid-lg btn-block"
+                        onclick="document.getElementById('inputFile').click()"
+                      >
+                        Add Pdf
+                      </button>
+                      <div class="form-group inputDnD">
+                        <label class="sr-only" for="inputFile"
+                          >File Upload</label
+                        >
+                        <input
+                          type="file"
+                          class="form-control-file font-weight-bold"
+                          id="inputFile"
+                          accept=".pdf"
+                          onchange="readUrl(this)"
+                          data-title="Drag and drop a file"
+                        />
                       </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- end of textinput-container -->
@@ -287,54 +323,130 @@
     </header>
     <!-- end of header -->
 
+    <!-- quiz Section -->
+    <div class="cards-1" id="questionDetails">
+      <!-- quiz container -->
+      <div id="container">
+        <!--        <div id="">Start Quiz!</div> -->
+        <form
+          id="questtionno-form"
+          class=""
+          name="question_num_form"
+          data-toggle="validator"
+          data-focus="false"
+        >
+          <div class="form-group text-container" id="questionNumsection">
+            <input
+              type="number"
+              name="noofquestions"
+              id="noofquestions"
+              placeholder="Number of questions.." autofocus
+            />
+          </div>
 
-    <!-- ANALYTICS -->
-    <div class="cards-1" id="description">
-      
-      <!-- end of container -->
+              <div class="form-group form-check">
+                <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample" checked>
+                <label class="custom-control-label" for="defaultInline1">True/false questions</label>
+              </div>
+
+              <div class="form-group form-check">
+                <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample" disabled>
+                <label class="custom-control-label" for="defaultInline2">multiple-choice questions<small>(comming Soon!)</small></label>
+              </div>
+
+              <div class="form-group form-check">
+                <input type="radio" class="custom-control-input" id="defaultInline3" name="inlineDefaultRadiosExample" disabled>
+                <label class="custom-control-label" for="defaultInline3">recall questions<small>(comming Soon!)</small></label>
+              </div>
+
+          <button class="btn-outline-sm" type="submit" id="finalgeneratebtn">
+            Go
+          </button>
+        </form>
+
+        <div id="quiz" style="display: none">
+          <div id="question"></div>
+          <div id="qImg"></div>
+          <div id="choices">
+            <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+            <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+            <!--  <div class="choice" id="C" onclick="checkAnswer('C')"></div> -->
+          </div>
+          <div id="timer">
+            <div id="counter"></div>
+            <div id="btimeGauge"></div>
+            <div id="timeGauge"></div>
+          </div>
+          <div id="progress"></div>
+        </div>
+        <div id="scoreContainer" style="display: none"></div>
+      </div>
+      <!-- quiz container end-->
     </div>
-    <!-- end of cards-1 -->
-    <!-- end of ANALYTICS -->
+    <!-- end of quizSection -->
 
     <!-- demo Lightbox 2 -->
     <div id="some-lightbox-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
       <!-- quiz container -->
       <div id="container">
         <!--        <div id="">Start Quiz!</div> -->
-        <form id="questtionno-form" class="offset-lg-4" name="question_num_form" data-toggle="validator" data-focus="false">
-            <div class="form-group text-container" id="questionNumsection">
-              <input
-                type="number"
-                name="noofquestions"
-                id="noofquestions"
-                placeholder="No of question.."
-              />
-            </div>
+        <form
+          id="questtionno-form"
+          class="offset-lg-4"
+          name="question_num_form"
+          data-toggle="validator"
+          data-focus="false"
+        >
+          <div class="form-group text-container" id="questionNumsection">
+            <input
+              type="number"
+              name="noofquestions"
+              id="noofquestions"
+              placeholder="No of question.."
+            />
+          </div>
 
-              <div class="form-group form-check questionNumsection">
-                <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample" checked>
-                <label class="custom-control-label" for="defaultInline1">True/false questions</label>
-              </div>
+          <div class="form-group form-check questionNumsection">
+            <input
+              type="radio"
+              class="custom-control-input"
+              id="defaultInline1"
+              name="inlineDefaultRadiosExample"
+              checked
+            />
+            <label class="custom-control-label" for="defaultInline1"
+              >True/false questions</label
+            >
+          </div>
 
-              <div class="form-group form-check questionNumsection">
-                <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
-                <label class="custom-control-label" for="defaultInline2">multiple-choice questions</label>
-              </div>
+          <div class="form-group form-check questionNumsection">
+            <input
+              type="radio"
+              class="custom-control-input"
+              id="defaultInline2"
+              name="inlineDefaultRadiosExample"
+            />
+            <label class="custom-control-label" for="defaultInline2"
+              >multiple-choice questions</label
+            >
+          </div>
 
-              <div class="form-group form-check questionNumsection">
-                <input type="radio" class="custom-control-input" id="defaultInline3" name="inlineDefaultRadiosExample">
-                <label class="custom-control-label" for="defaultInline3">recall questions</label>
-              </div>
-            
-                <button
-                class="btn-outline-sm"
-                type="submit"
-                id="finalgeneratebtn"
-              >
-                Go
-              </button>
+          <div class="form-group form-check questionNumsection">
+            <input
+              type="radio"
+              class="custom-control-input"
+              id="defaultInline3"
+              name="inlineDefaultRadiosExample"
+            />
+            <label class="custom-control-label" for="defaultInline3"
+              >recall questions</label
+            >
+          </div>
+
+          <button class="btn-outline-sm" type="submit" id="finalgeneratebtn">
+            Go
+          </button>
         </form>
-
 
         <div id="quiz" style="display: none">
           <div id="question"></div>
@@ -395,12 +507,12 @@
                   <div class="media-body">Fast email checking</div>
                 </li>
               </ul>
-<!--               <a class="btn-solid-reg mfp-close" href="sign-up.html">next</a> -->
+              <!--               <a class="btn-solid-reg mfp-close" href="sign-up.html">next</a> -->
               <a class="btn-outline-reg mfp-close as-button" href="#screenshots"
                 >tefresh</a
               >
             </div>
-            
+
             <!-- end of col -->
           </div>
           <!-- end of quizzsection -->
@@ -411,7 +523,6 @@
     </div>
     <!-- end of lightbox-basic -->
     <!-- end of demo lightbox 2 -->
-
 
     <!-- Footer -->
     <svg
@@ -468,7 +579,7 @@
 
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
-    <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- Bootstrap framework -->
     <script src="js/jquery.magnific-popup.js"></script>
@@ -478,8 +589,8 @@
     <script src="https://unpkg.com/compromise-numbers"></script>
     <script src="https://unpkg.com/compromise-sentences"></script>
     <script>
-    nlp.extend(compromiseNumbers)
-    nlp.extend(compromiseSentences)
+      nlp.extend(compromiseNumbers);
+      nlp.extend(compromiseSentences);
     </script>
 
     <script>
@@ -497,9 +608,7 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
-
-
     </script>
-    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
   </body>
 </html>
