@@ -8,12 +8,12 @@
     />
 
     <!-- SEO Meta Tags -->
-    <meta
+ <meta
       name="description"
-      content="Learn Better with Smartquiz"
+      content="Smartquiz.me is your place to test your knowledge. Take automatically generated quizzes to assess your self."
     />
-    <!-- Website Title -->
-    <title>SmartQuiz - Find out how much do you learn</title>
+    
+    <title>SmartQuiz Pricing- Find out how much do you learn</title>
 
     <!-- Styles -->
     <link
@@ -23,35 +23,12 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" />
     <link href="css/swiper.css" rel="stylesheet" />
-    <link href="css/magnific-popup.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/quiz.css" rel="stylesheet" />
     <link rel="manifest" href="manifest.webmanifest" />
     <!-- Favicon  -->
     <link rel="icon" href="images/favicon.png" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
-    />
-
-    <!-- <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/a45ca27fcc08e4bed1fc56b51/5c65fc623c816c8cabc36a073.js");</script> -->
   </head>
   <body data-spy="scroll" data-target=".fixed-top">
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-performance.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"
-    />
-
     <!-- Preloader -->
     <div class="spinner-wrapper">
       <div class="spinner">
@@ -61,29 +38,13 @@
       </div>
     </div>
     <!-- end of preloader -->
-    <!-- <button class="add-button">Add to home screen</button> -->
-    <style>
-      /* .add-button {
-  position: absolute;
-  top: 1px;
-  left: 1px;
-} */
-    </style>
-
+    
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
       <div class="container">
-        <div
-          id="login-lightbox"
-          class="lightbox-basic zoom-anim-dialog mfp-hide"
-        >
-          <h1>Login or Sign-up</h1>
-          <div id="firebaseui-auth-container"></div>
-          <div id="loader">Loading...</div>
-        </div>
-
+ 
         <!-- Image Logo -->
-        <a class="navbar-brand logo-image" href="#"
+        <a class="navbar-brand logo-image" href="index.html"
           ><img src="images/logo.png" alt="alternative"
         /></a>
 
@@ -105,54 +66,18 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link page-scroll" href="#header"
-                >HOME <span class="sr-only">(current)</span></a
+              <a class="nav-link page-scroll" href="index.html"
+                >HOME</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link page-scroll" href="#description"
-                >FEATURES <span class="sr-only"></span
-              ></a>
-            </li>
-            <li class="nav-item">
-              <a
-                hidden
-                id="sign-in"
-                class="nav-link popup-with-move-anim"
-                href="#login-lightbox"
-                >Login</a
+              <a class="nav-link page-scroll" href="#"
+                >PRICING <span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item">
-              <a hidden id="dashboard" class="nav-link" href="dashboard.html"
-                >Dashboard</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link add-button">Install App</a>
-            </li>
-            <li class="nav-item">
-              <a
-                hidden
-                id="user-name"
-                class="nav-link"
-                href="#login-lightbox"
-              ></a>
-            </li>
-            <li class="nav-item">
-              <div
-                hidden
-                id="user-pic"
-                class="rounded-circle nav-link user-profile"
-              ></div>
-            </li>
-            <li class="nav-item">
-              <a
-                hidden
-                id="sign-out"
-                class="btn btn-outline-danger btn-auth"
-                href="#login-lightbox"
-                >Sign Out</a
+              <a class="nav-link page-scroll" href="dashboard.html"
+                >DASHBOARD</a
               >
             </li>
           </ul>
