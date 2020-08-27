@@ -482,6 +482,7 @@ function urlSubmit() {
     });
     // alert(text);
   });
+  noofquestionsinput.focus();
 }
 
 // negate positive functions
@@ -645,17 +646,17 @@ function scoreRender() {
   // choose the image based on the scorePerCent
   let img =
     scorePerCent >= 80
-      ? "img/5.png"
+      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F80.gif?v=1598519126025"
       : scorePerCent >= 60
-      ? "img/4.png"
+      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F80.gif?v=1598519126025"
       : scorePerCent >= 40
-      ? "img/3.png"
+      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520"
       : scorePerCent >= 20
-      ? "img/2.png"
-      : "img/1.png";
+      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520"
+      : "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520";
 
-  //scoreDiv.innerHTML = "<img src="+ img +">";
-  scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
+  scoreDiv.innerHTML = "<img src="+ img +">";
+  // scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
 }
 
 var urlInput = document.getElementById("urlInput");
