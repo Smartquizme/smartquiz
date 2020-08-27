@@ -130,9 +130,9 @@ body{
     display: none;
 }
 #scoreContainer img{
-    position: absolute;
-    top:100px;
-    left:325px;
+   width: 300px;
+    display: block;
+    margin: auto;
 }
 #scoreContainer p{
     position: absolute;
