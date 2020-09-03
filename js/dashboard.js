@@ -485,6 +485,26 @@ function urlSubmit() {
   noofquestionsinput.focus();
 }
 
+
+function textSubmit(){
+  var q;
+  var text = textInput.value;
+  var doc = nlp(text);
+  console.log(doc.sentences().toQuestion().text());
+    doc.sentences().map(function(sentences) {
+      q = {
+        question: negateSentence(sentences.text()),
+        choiceA: "True",
+        choiceB: "False",
+        //choiceC : "Wrong",
+        correct: "B"
+      };
+      questions.push(q);
+      //
+    });
+  noofquestionsinput.focus();
+  
+}
 // negate positive functions
 
 function negateSentence(sentence) {
@@ -661,10 +681,13 @@ function scoreRender() {
 
 var urlInput = document.getElementById("urlInput");
 var urlInputBtn = document.getElementById("submitUrl");
+var textInput = document.getElementById("textInput");
+var textInputBtn = document.getElementById("submitText");
 var quizzsection = document.getElementById("quizzsection");
 var question_text = document.getElementById("question-text");
 var questtionNoformElement = document.getElementById("questtionno-form");
 var noofquestionsinput = document.getElementById("noofquestions");
 
 urlInputBtn.addEventListener("click", urlSubmit);
+textInputBtn.addEventListener("click", textSubmit);
 questtionNoformElement.addEventListener("submit", startQuiz);
