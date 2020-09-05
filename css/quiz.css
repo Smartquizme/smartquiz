@@ -53,7 +53,8 @@ body{
 #question p{
     margin : 0;
     padding : 15px;
-    font-size: 1.25em;
+    font-size: 2vw;
+/*     font-size: 1.25em; */
 }
 
 #choices{
@@ -123,7 +124,7 @@ body{
     background-color: white;
     opacity: 0.95;
     height: 300px;
-    width : 700px;
+/*     width : 700px; */
     border-radius: 5px;
     box-shadow: 0px 5px 15px 0px;
     position: relative;
@@ -155,3 +156,21 @@ body{
     position: absolute;
     top: 50px;
 } */
+
+
+@media(max-width: 768px){
+  
+  #qImg{
+    display: none;
+  }
+  #progress{
+    text-align: center;
+  }
+  #choices{
+    text-align: center;
+  }
+  .choice {
+    width: 85px;
+  }
+  
+}

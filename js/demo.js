@@ -195,7 +195,7 @@ function scoreRender() {
       ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520"
       : "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520";
 
-  scoreDiv.innerHTML = "<img src="+ img +">";
+  scoreDiv.innerHTML = "<img src="+ img +" class=\"hidden-sm-down\">";
   // scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
 }
 
