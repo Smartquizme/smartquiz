@@ -35,64 +35,65 @@ Colors:
 /******************************/
 /*     01. General Styles     */
 /******************************/
+@import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
 body,
 html {
     width: 100%;
 	height: 100%;
 }
-
+font-family: 'Short Stack', cursive;
 body, p {
 	color: #555; 
-	font: 400 1rem/1.625rem "Open Sans", sans-serif;;
+	font: 400 1rem/1.625rem 'Short Stack', cursive;
 }
 
 .p-large {
-	font: 400 1.125rem/1.75rem "Open Sans", sans-serif;
+	font: 400 1.125rem/1.75rem 'Short Stack', cursive;
 }
 
 .p-small {
-	font: 400 0.875rem/1.5rem "Open Sans", sans-serif;
+	font: 400 0.875rem/1.5rem 'Short Stack', cursive;
 }
 
 h1 {
 	color: #333;
-	font: 700 2.5rem/3.125rem "Open Sans", sans-serif;
+	font: 700 2.5rem/3.125rem 'Short Stack', cursive;
 	letter-spacing: -0.2px;
 }
 
 h2 {
 	color: #333;
-	font: 700 2rem/2.625rem "Open Sans", sans-serif;
+	font: 700 2rem/2.625rem 'Short Stack', cursive;
 	letter-spacing: -0.2px;
 }
 
 h3 {
 	color: #333;
-	font: 700 1.625rem/2.125rem "Open Sans", sans-serif;
+	font: 700 1.625rem/2.125rem 'Short Stack', cursive;
 	letter-spacing: -0.2px;
 }
 
 h4 {
 	color: #333;
-	font: 700 1.375rem/1.75rem "Open Sans", sans-serif;
+	font: 700 1.375rem/1.75rem 'Short Stack', cursive;
 	letter-spacing: -0.1px;
 }
 
 h5 {
 	color: #333;
-	font: 700 1.125rem/1.5rem "Open Sans", sans-serif;
+	font: 700 1.125rem/1.5rem 'Short Stack', cursive;
 	letter-spacing: -0.1px;
 }
 
 h6 {
 	color: #333;
-	font: 700 1rem/1.375rem "Open Sans", sans-serif;
+	font: 700 1rem/1.375rem 'Short Stack', cursive;
 	letter-spacing: -0.1px;
 }
 
 .above-heading {
 	color: #ff5900;
-	font: 700 0.75rem/0.875rem "Open Sans", sans-serif;
+	font: 700 0.75rem/0.875rem 'Short Stack', cursive;
 	text-align: center;
 }
 
@@ -101,11 +102,11 @@ h6 {
 }
 
 .testimonial-text {
-	font: italic 400 1rem/1.625rem "Open Sans", sans-serif;
+	font: italic 400 1rem/1.625rem 'Short Stack', cursive;
 }
 
 .testimonial-author {
-	font: 700 1rem/1.625rem "Open Sans", sans-serif;
+	font: 700 1rem/1.625rem 'Short Stack', cursive;
 	letter-spacing: -0.1px;
 }
 
@@ -150,7 +151,7 @@ a.white {
 	border-radius: 2rem;
 	background-color: #ff5900;
 	color: #fff;
-	font: 700 0.875rem/0 "Open Sans", sans-serif;
+	font: 700 0.875rem/0 'Short Stack', cursive;
 	text-decoration: none;
 	transition: all 0.2s;
 }
@@ -168,7 +169,7 @@ a.white {
 	border-radius: 2rem;
 	background-color: #ff5900;
 	color: #fff;
-	font: 700 0.875rem/0 "Open Sans", sans-serif;
+	font: 700 0.875rem/0 'Short Stack', cursive;
 	text-decoration: none;
 	transition: all 0.2s;
 }
@@ -285,7 +286,7 @@ a.white {
 	border-radius: 0.25rem;
 	background-color: #fff;
 	color: #555;
-	font: 400 0.875rem/1.875rem "Open Sans", sans-serif;
+	font: 400 0.875rem/1.875rem 'Short Stack', cursive;
 	transition: all 0.2s;
 	-webkit-appearance: none; /* removes inner shadow on form inputs on ios safari */
 }
