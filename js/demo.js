@@ -8,7 +8,7 @@ function urlSubmit() {
   var url = urlInput.value;
   wtf.fetch(url).then(doc => {
     img = doc.images(0);
-    imgUrl = img.thumbnail();
+    // imgUrl = img.thumbnail();
     doc.sentences().map(function(sentences) {
       q = {
         question: negateSentence(sentences.text()),
