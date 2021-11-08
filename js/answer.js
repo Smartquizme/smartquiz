@@ -83,117 +83,8 @@ function saveMessage(messageText) {
   });
 }
 
-// Saves a new url on the Cloud Firestore.
-function saveUrl(url) {
-  // Add a new url entry to the Firebase database.
-  return firebase.firestore().collection('urls').add({
-    url: url,
-    name: getUserName(),
-    userId: getUserId(),
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  }).catch(function(error) {
-    console.error('Error writing new message to Firebase Database', error);
-  });
-}
-// Loads chat messages history and listens for upcoming ones.
-function loadUrls() {
-  // Create the query to load the last 12 messages and listen for new ones.
-
-}
 
 
-
-
-// Saves a new message containing an image in Firebase.
-// This first saves the image in Firebase storage.
-function saveImageMessage(file) {
-  // 1 - We add a message with a loading icon that will get updated with the shared image.
-  firebase.firestore().collection('messages').add({
-    name: getUserName(),
-    imageUrl: LOADING_IMAGE_URL,
-    profilePicUrl: getProfilePicUrl(),
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  }).then(function(messageRef) {
-    // 2 - Upload the image to Cloud Storage.
-    var filePath = firebase.auth().currentUser.uid + '/' + messageRef.id + '/' + file.name;
-    return firebase.storage().ref(filePath).put(file).then(function(fileSnapshot) {
-      // 3 - Generate a public URL for the file.
-      return fileSnapshot.ref.getDownloadURL().then((url) => {
-        // 4 - Update the chat message placeholder with the image’s URL.
-        return messageRef.update({
-          imageUrl: url,
-          storageUri: fileSnapshot.metadata.fullPath
-        });
-      });
-    });
-  }).catch(function(error) {
-    console.error('There was an error uploading a file to Cloud Storage:', error);
-  });
-}
-
-// Saves the messaging device token to the datastore.
-function saveMessagingDeviceToken() {
-  firebase.messaging().getToken().then(function(currentToken) {
-    if (currentToken) {
-      console.log('Got FCM device token:', currentToken);
-      // Saving the Device Token to the datastore.
-      firebase.firestore().collection('fcmTokens').doc(currentToken)
-          .set({uid: firebase.auth().currentUser.uid});
-    } else {
-      // Need to request permissions to show notifications.
-      requestNotificationsPermissions();
-    }
-  }).catch(function(error){
-    console.error('Unable to get messaging token.', error);
-  });
-}
-
-// Requests permissions to show notifications.
-function requestNotificationsPermissions() {
-  console.log('Requesting notifications permission...');
-  firebase.messaging().requestPermission().then(function() {
-    // Notification permission granted.
-    saveMessagingDeviceToken();
-  }).catch(function(error) {
-    console.error('Unable to get permission to notify.', error);
-  });
-}
-
-// Triggered when a file is selected via the media picker.
-function onMediaFileSelected(event) {
-  event.preventDefault();
-  var file = event.target.files[0];
-
-  // Clear the selection in the file picker input.
-  imageFormElement.reset();
-
-  // Check if the file is an image.
-  if (!file.type.match('image.*')) {
-    var data = {
-      message: 'You can only share images',
-      timeout: 2000
-    };
-    signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
-    return;
-  }
-  // Check if the user is signed-in
-  if (checkSignedInWithMessage()) {
-    saveImageMessage(file);
-  }
-}
-
-// Triggered when the send new message form is submitted.
-function onMessageFormSubmit(e) {
-  e.preventDefault();
-  // Check that the user entered a message and is signed in.
-  if (messageInputElement.value && checkSignedInWithMessage()) {
-    saveMessage(messageInputElement.value).then(function() {
-      // Clear message text field and re-enable the SEND button.
-      resetMaterialTextfield(messageInputElement);
-      toggleButton();
-    });
-  }
-}
 // Triggered generate quiz by article form is submitted.
 function onUrlFormSubmit(e) {
   e.preventDefault();
@@ -441,7 +332,7 @@ initFirebaseAuth();
 firebase.performance();
 
 // We load currently existing chat messages and listen to new ones.
-loadUrls();
+// loadUrls();
 
 
 
@@ -458,104 +349,104 @@ loadUrls();
 
 
 //questions array
-var questions = [];
+// var questions = [];
 
-function urlSubmit() {
-  var q;
-  var img;
-  var imgUrl;
-  var url = urlInput.value;
-  wtf.fetch(url).then(doc => {
-    img = doc.images(0);
-    // imgUrl = img.thumbnail();
-    doc.sentences().map(function(sentences) {
-      q = {
-        question: negateSentence(sentences.text()),
-        // imgSrc: imgUrl,
-        choiceA: "True",
-        choiceB: "False",
-        //choiceC : "Wrong",
-        correct: "B"
-      };
-      questions.push(q);
-      //
-    });
-    // alert(text);
-  });
-  noofquestionsinput.focus();
-}
+// function urlSubmit() {
+//   var q;
+//   var img;
+//   var imgUrl;
+//   var url = urlInput.value;
+//   wtf.fetch(url).then(doc => {
+//     img = doc.images(0);
+//     imgUrl = img.thumbnail();
+//     doc.sentences().map(function(sentences) {
+//       q = {
+//         question: negateSentence(sentences.text()),
+//         imgSrc: imgUrl,
+//         choiceA: "True",
+//         choiceB: "False",
+//         //choiceC : "Wrong",
+//         correct: "B"
+//       };
+//       questions.push(q);
+//       //
+//     });
+//     // alert(text);
+//   });
+//   noofquestionsinput.focus();
+// }
 
 
-function textSubmit(){
-  var q;
-  var text = textInput.value;
-  var doc = nlp(text);
-  console.log(doc.sentences().toQuestion().text());
-    doc.sentences().map(function(sentences) {
-      q = {
-        question: negateSentence(sentences.text()),
-        choiceA: "True",
-        choiceB: "False",
-        //choiceC : "Wrong",
-        correct: "B"
-      };
-      questions.push(q);
-      //
-    });
-  noofquestionsinput.focus();
+// function textSubmit(){
+//   var q;
+//   var text = textInput.value;
+//   var doc = nlp(text);
+//   console.log(doc.sentences().toQuestion().text());
+//     doc.sentences().map(function(sentences) {
+//       q = {
+//         question: negateSentence(sentences.text()),
+//         choiceA: "True",
+//         choiceB: "False",
+//         //choiceC : "Wrong",
+//         correct: "B"
+//       };
+//       questions.push(q);
+//       //
+//     });
+//   noofquestionsinput.focus();
   
-}
-// negate positive functions
+// }
+// // negate positive functions
 
-function negateSentence(sentence) {
-  var negativeQuestions = nlp(sentence)
-    .sentences()
-    .toNegative()
-    .text();
-  return cleantext(negativeQuestions);
-}
+// function negateSentence(sentence) {
+//   var negativeQuestions = nlp(sentence)
+//     .sentences()
+//     .toNegative()
+//     .text();
+//   return cleantext(negativeQuestions);
+// }
 
-function cleantext(str) {
-  // remove any citations and any text b/n brackets
-  return str.replace(/ *\([^)]*\) */g, "");
-}
+// function cleantext(str) {
+//   // remove any citations and any text b/n brackets
+//   return str.replace(/ *\([^)]*\) */g, "");
+// }
 
 
 /* Randomize questions array*/
-function shuffleQuestions(questions) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
+// function shuffleQuestions(questions) {
+//     for (let i = array.length - 1; i > 0; i--) {
+//         const j = Math.floor(Math.random() * (i + 1));
+//         [array[i], array[j]] = [array[j], array[i]];
+//     }
+// }
 // var url = 'https://en.wikipedia.org/wiki/Rajneesh&selector=p&scrape=text&pretty=true';
 // fetch('https://web.scraper.workers.dev/?url='+url)
 //   .then(response => response.json())
 //   .then(data => console.log(data));
 
 // select all elements
-const start = document.getElementById("start");
-const quiz = document.getElementById("quiz");
-const question = document.getElementById("question");
-const qImg = document.getElementById("qImg");
-const choiceA = document.getElementById("A");
-const choiceB = document.getElementById("B");
-const choiceC = document.getElementById("C");
-const counter = document.getElementById("counter");
-const timeGauge = document.getElementById("timeGauge");
-const progress = document.getElementById("progress");
-const scoreDiv = document.getElementById("scoreContainer");
+// const start = document.getElementById("start");
+// const quiz = document.getElementById("quiz");
+// const question = document.getElementById("question");
+// const qImg = document.getElementById("qImg");
+// const choiceA = document.getElementById("A");
+// const choiceB = document.getElementById("B");
+// const choiceC = document.getElementById("C");
+// const counter = document.getElementById("counter");
+// const timeGauge = document.getElementById("timeGauge");
+// const progress = document.getElementById("progress");
+// const scoreDiv = document.getElementById("scoreContainer");
 
 // create some variables
 //const lastQuestion = questions.length - 1;
-var lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
-let runningQuestion = 0;
-let count = 0;
-const questionTime = 10; // 10s
-const gaugeWidth = 150; // 150px
-const gaugeUnit = gaugeWidth / questionTime;
-let TIMER;
-let score = 0;
+// var lastQuestion = document.forms["question_num_form"]["noofquestions"].value;
+// let runningQuestion = 0;
+// let count = 0;
+// const questionTime = 10; // 10s
+// const gaugeWidth = 150; // 150px
+// const gaugeUnit = gaugeWidth / questionTime;
+// let TIMER;
+// let score = 0;
 
 // render a question
 function renderQuestion() {
@@ -593,101 +484,151 @@ function startQuiz(e) {
 }
 
 // render progress
-function renderProgress() {
-  // lastQuestion
-  for (let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
-    progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
-  }
-}
+// function renderProgress() {
+//   // lastQuestion
+//   for (let qIndex = 0; qIndex <= lastQuestion; qIndex++) {
+//     progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
+//   }
+// }
 
-// counter render
+// // counter render
 
-function renderCounter() {
-  if (count <= questionTime) {
-    counter.innerHTML = count;
-    timeGauge.style.width = count * gaugeUnit + "px";
-    count++;
-  } else {
-    count = 0;
-    // change progress color to red
-    answerIsWrong();
-    if (runningQuestion < lastQuestion) {
-      runningQuestion++;
-      renderQuestion();
-    } else {
-      // end the quiz and show the score
-      clearInterval(TIMER);
-      scoreRender();
-    }
-  }
-}
+// function renderCounter() {
+//   if (count <= questionTime) {
+//     counter.innerHTML = count;
+//     timeGauge.style.width = count * gaugeUnit + "px";
+//     count++;
+//   } else {
+//     count = 0;
+//     // change progress color to red
+//     answerIsWrong();
+//     if (runningQuestion < lastQuestion) {
+//       runningQuestion++;
+//       renderQuestion();
+//     } else {
+//       // end the quiz and show the score
+//       clearInterval(TIMER);
+//       scoreRender();
+//     }
+//   }
+// }
 
 // checkAnswer
 
-function checkAnswer(answer) {
-  if (answer == questions[runningQuestion].correct) {
-    // answer is correct
-    score++;
-    // change progress color to green
-    answerIsCorrect();
-  } else {
-    // answer is wrong
-    // change progress color to red
-    answerIsWrong();
-  }
-  count = 0;
-  if (runningQuestion < lastQuestion) {
-    runningQuestion++;
-    renderQuestion();
-  } else {
-    // end the quiz and show the score
-    clearInterval(TIMER);
-    scoreRender();
-  }
-}
+// function checkAnswer(answer) {
+//   if (answer == questions[runningQuestion].correct) {
+//     // answer is correct
+//     score++;
+//     // change progress color to green
+//     answerIsCorrect();
+//   } else {
+//     // answer is wrong
+//     // change progress color to red
+//     answerIsWrong();
+//   }
+//   count = 0;
+//   if (runningQuestion < lastQuestion) {
+//     runningQuestion++;
+//     renderQuestion();
+//   } else {
+//     // end the quiz and show the score
+//     clearInterval(TIMER);
+//     scoreRender();
+//   }
+// }
 
 // answer is correct
-function answerIsCorrect() {
-  document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
-}
+// function answerIsCorrect() {
+//   document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+// }
 
-// answer is Wrong
-function answerIsWrong() {
-  document.getElementById(runningQuestion).style.backgroundColor = "#f00";
-}
+// // answer is Wrong
+// function answerIsWrong() {
+//   document.getElementById(runningQuestion).style.backgroundColor = "#f00";
+// }
 
-// score render
-function scoreRender() {
-  scoreDiv.style.display = "block";
+// // score render
+// function scoreRender() {
+//   scoreDiv.style.display = "block";
 
-  // calculate the amount of question percent answered by the user
-  const scorePerCent = Math.round((100 * score) / lastQuestion);
+//   // calculate the amount of question percent answered by the user
+//   const scorePerCent = Math.round((100 * score) / lastQuestion);
 
-  // choose the image based on the scorePerCent
-  let img =
-    scorePerCent >= 80
-      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F80.gif?v=1598519126025"
-      : scorePerCent >= 60
-      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F80.gif?v=1598519126025"
-      : scorePerCent >= 40
-      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520"
-      : scorePerCent >= 20
-      ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520"
-      : "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520";
+//   // choose the image based on the scorePerCent
+//   let img =
+//     scorePerCent >= 80
+//       ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F80.gif?v=1598519126025"
+//       : scorePerCent >= 60
+//       ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F80.gif?v=1598519126025"
+//       : scorePerCent >= 40
+//       ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520"
+//       : scorePerCent >= 20
+//       ? "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520"
+//       : "https://cdn.glitch.com/679ccf85-1841-476d-af16-114eb8aef09c%2F4020.gif?v=1598519646520";
 
-  scoreDiv.innerHTML = "<img src="+ img +">";
-  // scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
-}
+//   scoreDiv.innerHTML = "<img src="+ img +">";
+//   // scoreDiv.innerHTML += "<p>" + scorePerCent + "%</p>";
+// }
 
-var urlInput = document.getElementById("urlInput");
-var urlInputBtn = document.getElementById("submitUrl");
-var textInput = document.getElementById("textInput");
-var textInputBtn = document.getElementById("submitText");
-var quizzsection = document.getElementById("quizzsection");
-var question_text = document.getElementById("question-text");
-var questtionNoformElement = document.getElementById("questtionno-form");
-var noofquestionsinput = document.getElementById("noofquestions");
+// var urlInput = document.getElementById("urlInput");
+// var urlInputBtn = document.getElementById("submitUrl");
+// var textInput = document.getElementById("textInput");
+// var textInputBtn = document.getElementById("submitText");
+// var quizzsection = document.getElementById("quizzsection");
+// var question_text = document.getElementById("question-text");
+// var questtionNoformElement = document.getElementById("questtionno-form");
+// var noofquestionsinput = document.getElementById("noofquestions");
 
-urlInputBtn.addEventListener("click", urlSubmit);
-textInputBtn.addEventListener("click", textSubmit);
-questtionNoformElement.addEventListener("submit", startQuiz);
+// textInputBtn.addEventListener("click", textSubmit);
+// questtionNoformElement.addEventListener("submit", startQuiz);
+
+
+
+
+let modelPromise = {};
+let search;
+let input;
+let contextDiv;
+let answerDiv;
+
+      const passage = "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple, and Facebook. Google was founded in September 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University in California. Together they own about 14 percent of its shares and control 56 percent of the stockholder voting power through supervoting stock. They incorporated Google as a California privately held company on September 4, 1998, in California. Google was then reincorporated in Delaware on October 22, 2002. An initial public offering (IPO) took place on August 19, 2004, and Google moved to its headquarters in Mountain View, California, nicknamed the Googleplex. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc. Google is Alphabet's leading subsidiary and will continue to be the umbrella company for Alphabet's Internet interests. Sundar Pichai was appointed CEO of Google, replacing Larry Page who became the CEO of Alphabet."
+const questionss = "Who is the CEO of Google?"
+// const model = await qna.load();
+// const answers = await model.findAnswers(question, passage);
+// console.log(answers);
+      // Load the model.
+  // qna.load().then(model => {
+  //   alert('loaded')
+  //   // Find the answers
+  //   model.findAnswers(questionss, passage).then(answers => {
+  //     console.log('Answers: ', answers);
+  //   });
+  // });
+
+
+
+const process = async () => {
+  const model = await modelPromise;
+  const answers = await model.findAnswers(input.value, contextDiv.value);
+    // const answers = await model.findAnswers(questionss, passage);
+  console.log(answers);
+  answerDiv.innerHTML =
+      answers.map(answer => answer.text + ' (score =' + answer.score + ')')
+          .join('<br>');
+};
+
+window.onload = () => {
+  modelPromise = qna.load();
+  input = document.getElementById('questionDiv');
+  search = document.getElementById('search');
+  contextDiv = document.getElementById('context');
+  answerDiv = document.getElementById('answer');
+  search.onclick = process;
+  process();
+
+  input.addEventListener('keyup', async (event) => {
+    if (event.key === 'Enter') {
+      process();
+    }
+  });
+};
